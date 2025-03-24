@@ -5,15 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Home Page</title>
 
-    <!-- Optimized Bootstrap CSS (Lazy Loading) -->
+    <!-- Lazy Loading Bootstrap CSS to Reduce Unused Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" media="print" onload="this.onload=null;this.removeAttribute('media');">
+    
+    <!-- Non-Critical Stylesheet Loaded Asynchronously -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.onload=null;this.removeAttribute('media');">
 
-    <!-- Inline Critical CSS -->
+    <!-- Inline Critical CSS for Above-the-Fold Content -->
     <style>
-        body { font-family: Arial, sans-serif; }
-        .hero-section { padding: 50px; background: #007bff; color: white; text-align: center; }
-        .btn-light { background: white; color: #007bff; border: none; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+
+        /* Prevent Layout Shifts */
+        .hero-section { padding: 50px; background: #007bff; color: white; text-align: center; min-height: 300px; }
+        img, iframe { max-width: 100%; height: auto; display: block; }
+
+        /* Ensure GPU Compositing for Smooth Animations */
+        .fade-in { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; will-change: opacity, transform; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
+
 </head>
 <body>
 
@@ -43,7 +53,7 @@
     </div>
 
     <!-- About Section -->
-    <section id="about" class="py-5">
+    <section id="about" class="py-5 fade-in">
         <div class="container">
             <h2 class="text-center">About Us</h2>
             <p class="text-center mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -56,12 +66,13 @@
     </section>
 
     <!-- Courses Section -->
-    <section id="courses" class="py-5 bg-light">
+    <section id="courses" class="py-5 bg-light fade-in">
         <div class="container">
             <h2 class="text-center mb-5">Our Courses</h2>
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
+                        <img src="course1.jpg" alt="Computer Science" width="300" height="200" loading="lazy">
                         <div class="card-body">
                             <h5 class="card-title">Computer Science</h5>
                             <p class="card-text">Learn the latest in programming and technology.</p>
@@ -70,6 +81,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
+                        <img src="course2.jpg" alt="Business Administration" width="300" height="200" loading="lazy">
                         <div class="card-body">
                             <h5 class="card-title">Business Administration</h5>
                             <p class="card-text">Master business strategies and management principles.</p>
@@ -78,6 +90,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
+                        <img src="course3.jpg" alt="Engineering" width="300" height="200" loading="lazy">
                         <div class="card-body">
                             <h5 class="card-title">Engineering</h5>
                             <p class="card-text">Hands-on training in multiple engineering fields.</p>
@@ -89,7 +102,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-5">
+    <section id="contact" class="py-5 fade-in">
         <div class="container">
             <h2 class="text-center mb-5">Contact Us</h2>
             <div class="row">
@@ -128,8 +141,16 @@
         <p>&copy; 2024 College Name. All Rights Reserved.</p>
     </footer>
 
-    <!-- Optimized Bootstrap JavaScript (Deferred) -->
+    <!-- Bootstrap JavaScript Deferred -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" defer></script>
+
+    <!-- Lazy Load Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fadeIns = document.querySelectorAll(".fade-in");
+            fadeIns.forEach(el => el.classList.add("visible"));
+        });
+    </script>
 
 </body>
 </html>
