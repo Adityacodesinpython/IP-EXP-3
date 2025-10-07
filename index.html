@@ -3,38 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Home Page</title>
+    <title>VESIT | College Home Page</title>
 
-    <!-- Lazy Loading Bootstrap CSS to Reduce Unused Styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" media="print" onload="this.onload=null;this.removeAttribute('media');">
-    
-    <!-- Non-Critical Stylesheet Loaded Asynchronously -->
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.onload=null;this.removeAttribute('media');">
-
-    <!-- Inline Critical CSS for Above-the-Fold Content -->
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        /* BASE STYLES */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; overflow-x: hidden; color: #333; line-height: 1.6; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        h1, h2, h3 { color: #004a99; font-weight: 600; }
+        h2 { font-size: 2.2rem; margin-bottom: 20px; }
+        h3 { font-size: 1.5rem; margin-top: 15px; }
+        p { margin-bottom: 1rem; }
+        img { max-width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+        section { padding: 60px 0; }
+        /* UTILITY CLASSES (Simulating Bootstrap) */
+        .text-center { text-align: center; }
+        .py-5 { padding-top: 3rem; padding-bottom: 3rem; }
+        .mb-5 { margin-bottom: 3rem; }
+        .mt-3 { margin-top: 1rem; }
+        .bg-light { background-color: #f8f9fa; }
+        .bg-dark { background-color: #343a40; }
+        .text-white { color: #fff; }
+        /* BUTTON STYLES */
+        .btn { display: inline-block; padding: 10px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease; cursor: pointer; border: none; }
+        .btn-light { background-color: #f8f9fa; color: #007bff; border: 1px solid #007bff; }
+        .btn-light:hover { background-color: #e2e6ea; }
+        .btn-primary { background-color: #007bff; color: white; }
+        .btn-primary:hover { background-color: #0056b3; }
 
-        /* Prevent Layout Shifts */
-        .hero-section { padding: 50px; background: #007bff; color: white; text-align: center; min-height: 300px; display: flex; flex-direction: column; justify-content: center; }
-        img, iframe { max-width: 100%; height: auto; display: block; }
+        /* NAVBAR STYLES */
+        .navbar { background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .navbar-brand { font-size: 1.5rem; font-weight: bold; color: #004a99 !important; text-decoration: none; padding: 10px 0; margin-left: 15px; }
+        .navbar-nav { display: flex; list-style: none; margin: 0; padding: 0; }
+        .nav-item a { text-decoration: none; color: #333; padding: 15px 15px; display: block; transition: color 0.3s; }
+        .nav-item a:hover, .nav-item .active { color: #007bff; }
+        .navbar-container { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1200px; margin: 0 auto; }
 
-        /* Ensure GPU Compositing for Smooth Animations */
-        .fade-in { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; will-change: opacity, transform; }
+        /* HERO STYLES */
+        .hero-section {
+            padding: 120px 50px 80px; /* Adjusted padding for fixed navbar */
+            background: linear-gradient(135deg, #007bff 0%, #004a99 100%);
+            color: white;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-section h1 { color: white; font-size: 3.5rem; margin-bottom: 10px; }
+        .hero-section p { font-size: 1.5rem; opacity: 0.9; }
+
+        /* COURSES GRID STYLES */
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .course-card { background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); transition: transform 0.3s; }
+        .course-card:hover { transform: translateY(-5px); }
+
+        /* CONTACT FORM STYLES */
+        .contact-form-container { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 30px; }
+        .contact-info, .contact-form { flex-basis: 48%; min-width: 300px; }
+        .contact-form label { display: block; margin-top: 15px; font-weight: 500; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .contact-form textarea { resize: vertical; }
+
+        /* ANIMATIONS (Keeping initial structure) */
+        .fade-in { opacity: 0; transform: translateY(10px); transition: opacity 0.6s ease, transform 0.6s ease; will-change: opacity, transform; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
-    
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">VESIT</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="#" style="text-decoration: none;">VESIT</a>
+            <div id="navbarNav">
+                <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
@@ -44,48 +86,155 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="hero-section">
-        <h1>Welcome to VESIT</h1>
-        <p>Empowering Future Leaders</p>
-        <a href="#courses" class="btn btn-light mt-3">Explore Courses</a>
+    <div class="hero-section" style="background-image: url('https://picsum.photos/1920/600?grayscale'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <h1 style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Welcome to VESIT</h1>
+        <p style="text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Empowering Future Leaders in Technology and Innovation</p>
+        <a href="#courses" class="btn btn-light mt-3" style="background-color: white; color: #007bff; border: none; font-size: 1.1rem;">Explore Our Programs →</a>
     </div>
 
-    <!-- About Section -->
     <section id="about" class="py-5 fade-in">
         <div class="container">
-            <h2 class="text-center">About Us</h2>
-            <p class="text-center mb-5">Our institution has been a leader in education for over 50 years.</p>
+            <h2 class="text-center">About VESIT: Vision, Excellence, Success</h2>
+            <p class="text-center mb-5" style="max-width: 800px; margin: 0 auto 3rem;">
+                Our institution has been a leader in technical education for over **50 years**, fostering an environment of rigorous academics, cutting-edge research, and holistic development. We are committed to producing engineers and technologists who can solve the challenges of tomorrow.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center;">
+                <div style="flex-basis: 45%;">
+                    <img src="https://picsum.photos/800/550?image=203" alt="Modern college campus building" style="width: 100%;">
+                </div>
+                <div style="flex-basis: 45%;">
+                    <h3 style="border-left: 4px solid #007bff; padding-left: 15px;">Our Core Philosophy</h3>
+                    <p>At VESIT, we believe in a project-based learning approach that combines strong theoretical foundations with intensive practical application. Our state-of-the-art labs and industry collaborations ensure students are job-ready from day one.</p>
+                    <ul>
+                        <li style="margin-bottom: 8px;">**Accredited Programs**: All B.Tech and M.Tech programs are fully accredited.</li>
+                        <li style="margin-bottom: 8px;">**Expert Faculty**: Over 80% of our faculty hold Ph.D. degrees.</li>
+                        <li style="margin-bottom: 8px;">**Innovation Hub**: Dedicated incubation centers for student startups.</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary mt-3" style="margin-top: 15px;">View Prospectus</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Courses Section -->
-    <section id="courses" class="py-5 bg-light fade-in">
+    <section style="background-color: #e9ecef; padding: 40px 0;">
+        <div class="container text-center">
+            <p style="font-size: 1.3rem; font-style: italic; color: #004a99;">
+                "VESIT provided the foundation for my career at Google. The focus on deep learning and practical skills was invaluable."
+            </p>
+            <p style="font-weight: bold; margin-top: 10px;">— Jane Doe, Class of '18, Software Engineer at TechCo</p>
+        </div>
+    </section>
+
+    <section id="courses" class="bg-light py-5 fade-in">
         <div class="container">
-            <h2 class="text-center mb-5">Our Courses</h2>
+            <h2 class="text-center mb-5">Our Premier Engineering Programs</h2>
+
+            <div class="courses-grid">
+                <div class="course-card">
+                    <img src="https://picsum.photos/400/250?image=1047" alt="Computer screen with code" style="margin-bottom: 15px;">
+                    <h3 style="color: #007bff;">Computer Science & Engineering (B.Tech/M.Tech)</h3>
+                    <p>Focuses on advanced algorithms, artificial intelligence, machine learning, and secure software development. Graduates enter top tech firms globally.</p>
+                    <a href="#" style="color: #007bff; text-decoration: none; font-weight: bold;">Learn More →</a>
+                </div>
+
+                <div class="course-card">
+                    <img src="https://picsum.photos/400/250?image=54" alt="Circuit board with components" style="margin-bottom: 15px;">
+                    <h3 style="color: #28a745;">Electronics & Telecommunication (B.Tech)</h3>
+                    <p>Covers signal processing, embedded systems, VLSI design, and communication networks, preparing students for the future of connected devices.</p>
+                    <a href="#" style="color: #28a745; text-decoration: none; font-weight: bold;">Learn More →</a>
+                </div>
+
+                <div class="course-card">
+                    <img src="https://picsum.photos/400/250?image=124" alt="Abstract data flow diagram" style="margin-bottom: 15px;">
+                    <h3 style="color: #ffc107;">Information Technology (B.Tech)</h3>
+                    <p>A blend of hardware, software, and management skills. Key areas include data science, cloud computing, and network security.</p>
+                    <a href="#" style="color: #ffc107; text-decoration: none; font-weight: bold;">Learn More →</a>
+                </div>
+
+                <div class="course-card">
+                    <img src="https://picsum.photos/400/250?image=51" alt="Factory machinery" style="margin-bottom: 15px;">
+                    <h3 style="color: #dc3545;">Mechanical Engineering (B.Tech/M.Tech)</h3>
+                    <p>Traditional engineering combined with modern robotics, CAD/CAM, thermal sciences, and sustainable design practices.</p>
+                    <a href="#" style="color: #dc3545; text-decoration: none; font-weight: bold;">Learn More →</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="py-5 fade-in">
         <div class="container">
-            <h2 class="text-center mb-5">Contact Us</h2>
+            <h2 class="text-center mb-5">Connect With Us</h2>
+            
+            <div class="contact-form-container">
+                
+                <div class="contact-info" style="padding: 20px; background-color: #f1f1f1; border-radius: 8px;">
+                    <h3 style="margin-top: 0; color: #004a99;">VESIT Admissions Office</h3>
+                    <p>Ready to take the next step? Contact our admissions team for personalized guidance on applications, scholarships, and campus visits.</p>
+                    
+                    <p style="margin-top: 20px;">
+                        <strong style="color: #007bff;">Address:</strong><br>
+                        VESIT Campus, Knowledge City, Tech Lane 101,<br>
+                        Mumbai, Maharashtra, India - 400000
+                    </p>
+                    
+                    <p>
+                        <strong style="color: #007bff;">Phone:</strong> +91 98765 43210
+                    </p>
+                    
+                    <p>
+                        <strong style="color: #007bff;">Email:</strong> <a href="mailto:admissions@vesit.edu" style="color: #007bff; text-decoration: none;">admissions@vesit.edu</a>
+                    </p>
+                    
+                    <h3 style="margin-top: 30px; color: #004a99;">Campus Location</h3>
+                    <img src="https://picsum.photos/400/250?image=1062" alt="VESIT campus map location" style="margin-top: 10px;">
+                </div>
+
+                <form class="contact-form" action="/submit-form" method="POST" style="padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+                    <h3 style="margin-top: 0; color: #004a99;">Send Us a Message</h3>
+
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe">
+
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="Inquiry about B.Tech CSE">
+
+                    <label for="message">Your Message *</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="I am interested in..."></textarea>
+
+                    <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Submit Inquiry</button>
+                </form>
+
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 College Name. All Rights Reserved.</p>
+        <div class="container">
+            <p style="margin: 0; font-size: 0.9rem;">&copy; 2024 VESIT College of Technology. All Rights Reserved. | Designed with Semantic HTML and Inline Styles.</p>
+        </div>
     </footer>
 
-    <!-- Bootstrap JavaScript Deferred -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" defer></script>
-
-    <!-- Lazy Load Animations -->
     <script>
+        // Manually trigger the 'visible' class after DOM is ready
         document.addEventListener("DOMContentLoaded", function() {
             const fadeIns = document.querySelectorAll(".fade-in");
-            fadeIns.forEach(el => el.classList.add("visible"));
+            // A simple timeout to simulate a slight delay, making the effect more noticeable
+            setTimeout(() => {
+                fadeIns.forEach(el => el.classList.add("visible"));
+            }, 100);
+        });
+        
+        // Simple smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
